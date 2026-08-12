@@ -1,5 +1,8 @@
 # Heart Disease Risk Prediction — Logistic Regression
 
+## MAKE BY
+- Sebastian Albarracin Silva (Ingeneria de Sistemas)
+
 ## Exercise Summary
 
 This project implements **logistic regression from scratch** (NumPy/Pandas/
@@ -48,32 +51,45 @@ depression (`oldpeak`) and number of major vessels (`ca`)**.
 
 ## SageMaker Evidence
 
-*(To be filled in after completing Step 5 in the AWS Academy console — see
-the "Step 5" section of `heart_disease_lr_analysis.ipynb` for the exact
-notebook cells to run there.)*
+The model was trained and evaluated inside **Amazon SageMaker Studio's Code
+Editor** (AWS Academy Learner Lab), using the "Step 5" cells from
+`heart_disease_lr_analysis.ipynb`, on the same `heart_train.csv` /
+`heart_test.csv` produced locally in Step 4. No SageMaker endpoint or
+deployment service was created, per the AWS Academy account limitations for
+this course.
 
-**Environment:** *(fill in — e.g. SageMaker notebook instance type, kernel,
-AWS region)*
+**Environment:** SageMaker Studio Code Editor (Code-OSS based), Space
+`quickstart-default`, `conda base` kernel — Python 3.12.13, region
+`us-east-1`.
 
-1. **Notebook instance running / InService**
-   `![SageMaker notebook instance](images/sagemaker_instance.png)`
-2. **Training execution completed** (cost printed at the end of training)
-   `![SageMaker training completed](images/sagemaker_training.png)`
-3. **Test-set metrics**
-   `![SageMaker test metrics](images/sagemaker_metrics.png)`
+1. **SageMaker Studio Code Editor running the notebook**, loading
+   `heart_train.csv` / `heart_test.csv` (Cell 1 of Step 5)
+   ![SageMaker Studio Code Editor loading the training and test CSVs in the heart_disease_lr_analysis notebook](images/sagemaker_instance.png)
+2. **Training execution completed** — cost decreasing over iterations and
+   final training cost printed (Cell 3 of Step 5)
+   ![SageMaker training cell output showing cost per iteration and the final training cost of 0.432](images/sagemaker_training.png)
+3. **Test-set metrics** — accuracy, precision, recall and F1 printed after
+   evaluating on the held-out test set (Cell 4 of Step 5)
+   ![SageMaker test metrics output: accuracy 0.708, precision 0.69, recall 0.833, F1 0.755](images/sagemaker_metrics.png)
 
 **Test-set results (SageMaker):**
 
 | Metric | Value |
 |---|---|
-| Accuracy | *(fill in)* |
-| Precision | *(fill in)* |
-| Recall | *(fill in)* |
-| F1 | *(fill in)* |
+| Accuracy | 0.708 |
+| Precision | 0.690 |
+| Recall | 0.833 |
+| F1 | 0.755 |
 
-**Comparison with local execution:** *(fill in — both runs use the same
-`heart_train.csv` / `heart_test.csv` and hyperparameters, so results should
-be very close; note and explain any difference actually observed.)*
+**Comparison with local execution:** the SageMaker run reproduces the local
+results (Step 2, `lambda=0.1`) **exactly** — accuracy 0.708, precision 0.69,
+recall 0.833, F1 0.755 in both environments. This is expected: both runs use
+the identical preprocessed `heart_train.csv` / `heart_test.csv` exported in
+Step 4, the same from-scratch NumPy implementation, and the same
+hyperparameters (`alpha=0.3`, `lambda=0.1`, `num_iters=3000`), so there is no
+source of randomness or library-version drift left to cause a difference.
+This confirms the model's behavior is fully reproducible across local and
+cloud environments.
 
 ## Repository Contents
 
